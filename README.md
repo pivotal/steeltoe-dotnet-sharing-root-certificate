@@ -1,4 +1,4 @@
-# dotnet-sharing-root-certificate
+# steeltoe-dotnet-sharing-root-certificate
 An example Steeltoe solution for an app on Pivotal Application Services (PAS) sharing a root certificate, with an app hosted outside the PAS platform.
 
 ### NET-core2_1-linux-valid-certificate
