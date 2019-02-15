@@ -71,7 +71,7 @@ namespace NET_core2_1_linux_valid_certificate.Controllers
 		}
 
 		// GET api/values
-		[HttpGet]
+		/*[HttpGet]
 		public ActionResult<string> Get(int id)
 		{
 			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://35.170.55.36");
@@ -82,6 +82,27 @@ namespace NET_core2_1_linux_valid_certificate.Controllers
 			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse()) {
 				using (StreamReader sr = new StreamReader(response.GetResponseStream())) {
 					ret = sr.ReadToEnd();
+				}
+			}
+
+			return ret;
+		}*/
+		[HttpGet]
+		public async Task<ActionResult<string>> Get(int id)
+		{
+			string ret = "";
+
+			//THIS IS AN EXAMPLE ONLY. USE HTTPFACTORY IN REAL CODE.
+			//https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests
+			//https://github.com/SteeltoeOSS/Samples/blob/1ae78bda3dca13bbab2f7c8a9ff092463807d7ca/Discovery/src/AspDotNetCore/Fortune-Teller-UI/Startup.cs#L29
+			using (HttpClient client = new HttpClient())
+			{
+				// Call asynchronous network methods in a try/catch block to handle exceptions
+				try{
+					ret = await client.GetStringAsync("https://somewhere");
+				}catch (HttpRequestException e){
+					_logger.LogError(e, e.Message);
+					throw;
 				}
 			}
 
